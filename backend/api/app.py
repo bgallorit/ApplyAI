@@ -17,7 +17,7 @@ CORS(app)  # Enable Cross-Origin Resource Sharing for all routes.
 
 # Set up the SQLAlchemy database URI with an absolute path
 project_root = os.path.abspath(os.path.dirname(__file__))
-db_path = "C:/Users/bgall/Desktop/capstone/GradJobSearchEngine/gradjobsearch/jobs.db"
+db_path = os.path.abspath(os.path.join(project_root, "..", "..", "jobs.db")) #hardcoded, fix later
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_path}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
