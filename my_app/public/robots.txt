@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /backend/data/  
+Disallow: /node_modules/  
+Disallow: /api/

@@ -1,0 +1,126 @@
+:root {
+  --primary-color: #4CAF50;
+  --header-height: 60px; /* Adjust as needed */
+  --footer-height: 60px; /* Adjust as needed */
+  --hover-color: #367C39;
+  --background-color: #F0F2F5;
+  --text-color: #333;
+  --text-secondary-color: #666;
+  --footer-background-color: #2E4053;
+  --header-background-color: #FFFFFF;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+  --link-hover-color: #367C39;
+  --animation-duration: 0.5s;
+  --form-element-height: 2.5rem;
+  --job-card-footer-height: 50px; /* Set the fixed height for the job card footer */
+  --job-card-width: 450px; /* Increased width for job cards */
+  --job-card-height: 350px; /* Increased height for job cards */
+  --filter-sidebar-width: 250px; /* Adjusted width for the filter sidebar */
+}
+
+/* Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, li,
+figure, figcaption, blockquote,
+dl, dt {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Job Card Styles */
+  .job-card {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1rem; /* Space between cards */
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Maximum width of the job cards */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Contains the content within each card */
+}
+
+.job-card-content {
+  overflow-y: auto;
+  margin-bottom: 10px; /* Space for scrolling content */
+  flex-grow: 1; /* Allow content to grow and fill the space */
+}
+
+.job-card-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--job-card-footer-height); /* Height of the footer */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Padding inside the footer */
+  background-color: #fff; /* Footer background */
+}
+
+.btn-save,
+.btn-apply {
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color var(--transition-speed);
+}
+
+.btn-save {
+  background-color: #f9f9f9;
+  color: var(--text-color);
+}
+
+.btn-save:hover {
+  background-color: #e2e2e2;
+}
+
+.btn-apply {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-apply:hover {
+  background-color: var(--hover-color);
+}
+
+/* Adjustments for filter sidebar */
+.filters-container {
+  width: var(--filter-sidebar-width); /* Apply the adjusted sidebar width */
+  /* Add any necessary padding, margin, or other styles */
+}
+
+/* Responsive adjustments for job cards and filter sidebar */
+@media (max-width: 768px) {
+  .job-card {
+    width: 100%; /* Full width on smaller screens */
+    height: auto; /* Auto height for flexible content */
+    padding-bottom: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .filters-container {
+    width: 100%; /* Full width for filters on smaller screens */
+    margin-bottom: 1rem; /* Space below filters container */
+  }
+
+  .btn-save,
+  .btn-apply {
+    padding: 8px 16px; /* Adjust button padding for smaller screens */
+    font-size: 0.875rem; /* Adjust font size for buttons */
+  }
+}

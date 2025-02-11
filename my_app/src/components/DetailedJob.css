@@ -1,0 +1,90 @@
+/* DetailedJob component styling */
+.detailed-job {
+  margin: 20px auto; /* Center the detailed job view in the container */
+  padding: 20px;
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 4px;
+  background: #fff; /* White background for clarity */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  max-width: 600px; /* Max width to avoid overly wide layouts */
+  max-height: 600px; /* Limit height to trigger overflow */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative; /* Needed for absolute positioning of the scrollbar */
+  scrollbar-width: thin; /* Make scrollbar thinner for non-webkit browsers */
+  scrollbar-color: #4CAF50 #e0e0e0; /* Scrollbar styling for non-webkit browsers */
+}
+
+/* Custom scrollbar for Webkit browsers */
+.detailed-job::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.detailed-job::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Track color */
+}
+
+.detailed-job::-webkit-scrollbar-thumb {
+  background-color: #4CAF50; /* Handle color */
+  border-radius: 10px; /* Rounded handle */
+}
+
+/* Smooth transition effect for hover states */
+.apply-button:hover,
+.apply-button:focus {
+  background-color: #367C39; /* Darker green on hover for feedback */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  filter: brightness(110%); /* Slightly change the brightness on hover */
+  transform: translateY(-2px); /* Slight movement for interactive feedback */
+}
+
+.detailed-job h2 {
+  margin-top: 0;
+  color: #333; /* Darker text for contrast */
+  margin-bottom: 15px; /* Spacing after the title */
+}
+
+.detailed-job-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; /* Align action buttons to the right */
+}
+
+.detailed-job p {
+  margin-bottom: 1em; /* Space below paragraphs for readability */
+  line-height: 1.6; /* Line height for readability */
+  font-size: 1rem; /* Font size for readability */
+  text-align: justify; /* Justify text for better appearance */
+}
+
+.apply-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px; /* Match the border-radius with other elements */
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover and press */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .detailed-job {
+      margin: 10px;
+      padding: 15px;
+  }
+
+  .detailed-job-actions {
+      flex-direction: column; /* Stack buttons on small screens */
+      align-items: stretch; /* Full-width buttons */
+  }
+
+  .apply-button {
+      width: 100%; /* Full-width button on mobile */
+      margin: 10px 0; /* Spacing around button */
+  }
+}

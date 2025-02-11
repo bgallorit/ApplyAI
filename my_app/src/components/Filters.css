@@ -1,0 +1,86 @@
+.filters-container {
+  background: #fff;
+  flex-basis: 200px; /* Adjust this value as needed */
+  width: 100%; /* This will allow it to grow to the flex-basis if there's space */
+  max-width: 300px; /* This will prevent it from growing any larger than 300px */
+  height: auto; /* The height is adjusted automatically based on content */
+  padding: 10px; /* Reduced padding */
+  border-radius: 10px;
+  flex: 0 0 var(--sidebar-width); /* Do not grow or shrink, use --sidebar-width variable */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px; /* Adding margin to create space around the panel */
+  margin-top: 2px;
+}
+
+.form-group {
+  margin-bottom: 20px; /* Increased margin for more space between inputs */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 10px; /* Increased for more space between label and input */
+  display: block;
+}
+
+.form-control {
+  width: calc(100% - 40px); /* Adjust width to account for padding */
+  padding: 10px; /* More padding for a larger input */
+  font-size: 1rem; /* Larger font size for better readability */
+  border: 1px solid #cccccc;
+  border-radius: 20px; /* Rounded borders for input */
+}
+
+.location-input {
+  border-radius: 20px; /* Consistent rounded borders */
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Increased gap for more space between checkboxes */
+}
+
+.checkbox-label input[type="checkbox"] {
+  accent-color: var(--primary-color); /* Color for checkbox */
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 15px; /* Adjusted padding */
+  margin-top: 10px; /* Space above the buttons */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 0.875rem; /* Adjusted font size */
+}
+
+.btn-secondary {
+  background-color: #dddddd; /* Grey background for secondary button */
+  color: #333;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  flex-wrap: wrap; /* Ensure buttons wrap on smaller screens */
+}
+
+/* Adjust the width of the buttons */
+.btn-primary, .btn-secondary {
+  flex: 1 1 auto; /* Allow buttons to grow and shrink */
+  min-width: 120px; /* Minimum width so text does not get too compressed */
+  text-align: center; /* Center button text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filters-container {
+    flex-basis: 100%; /* Take full width on smaller screens */
+    margin-bottom: 1rem; /* Add some space below on small screens */
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%; /* Full width buttons on smaller screens */
+    margin-bottom: 10px; /* Add margin below buttons */
+  }
+}

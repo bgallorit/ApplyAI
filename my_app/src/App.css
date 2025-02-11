@@ -1,0 +1,367 @@
+/* Root Variables */
+:root {
+  --primary-color: #4CAF50; /* Green */
+  --header-height: 60px; /* Replace with your actual header height */
+  --footer-height: 60px; /* Replace with your actual footer height */
+  --sidebar-width: 300px; /* Adjust this to change the filter container width */
+  --hover-color: #367C39; /* Darker green */
+  --background-color: #F0F2F5; /* Light gray background */
+  --text-color: #333; /* Dark text */
+  --text-secondary-color: #666; /* Gray text */
+  --footer-background-color: #2E4053; /* Dark blue footer */
+  --header-background-color: #FFFFFF; /* White header */
+  --border-radius: 10px; /* Border radius for cards and buttons */
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  --transition-speed: 0.3s; /* Speed for hover animations */
+  --link-hover-color: #367C39; /* Color for link hover state */
+  --animation-duration: 0.5s; /* Duration for fade-in animations */
+  --form-element-height: 2.5rem; /* Height for form elements */
+}
+
+/* Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dt {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.jobs-layout {
+  display: flex;
+  gap: 20px; /* Adjust the gap between the filters and job listings as needed */
+  align-items: flex-start; /* Align the items to the start of the flex container */
+}
+
+/* Utility classes for text */
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--text-secondary-color);
+}
+/* Main Layout Adjustments */
+/* Main Layout Adjustments */
+.main-content {
+  display: flex;
+  flex-direction: row; /* Ensure elements are side by side */
+  align-items: flex-start; /* Align items to the start of the container */
+  gap: 20px; /* Space between child components */
+  padding: 20px; /* Padding around the main content */
+}
+
+/* Pagination container should be separate and below the .jobs-layout */
+.pagination-container {
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%; /* Make pagination container full width */
+}
+
+.pagination-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #4CAF50; /* Border color matches primary color */
+  background-color: #FFFFFF; /* Light background color */
+  color: #4CAF50; /* Text color matches primary color */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button:hover,
+.pagination-button.active {
+  background-color: #4CAF50; /* Green background color on hover or active */
+  color: #FFFFFF; /* Text color becomes white on hover or active */
+  border-color: #4CAF50; /* Border color matches hover background color */
+}
+
+/* Active page button styles */
+.pagination-container .active-page {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #367C39;
+}
+
+/* Disabled buttons styles */
+.pagination-container .disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.filters-container {
+  flex: 0 0 300px; /* Does not grow or shrink, fixed at 300px */
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background: white;
+  box-shadow: var(--box-shadow);
+  height: calc(100vh - 120px); /* Assume header+footer total height + extra padding */
+  overflow-y: auto; /* Allows scrolling within the filter container if content overflows */
+}
+
+.job-listings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between job cards if stacking vertically */
+  padding-right: 20px; /* Padding on the right if needed */
+  /* Adjust width as needed based on your layout */
+}
+
+.job-card {
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px; /* This is var(--border-radius) from your :root */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Fixed width */
+  height: 200px; /* Fixed height */
+  margin-bottom: 20px; /* Space between cards */
+  /* Add more styles as needed */
+}
+
+.job-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+/* Adjust padding around search and clear filter buttons */
+.filters-container .form-actions {
+  display: flex;
+  gap: 0.5rem; /* Adjust gap between buttons */
+}
+
+.filters-container .search-button,
+.filters-container .clear-button {
+  flex: 1; /* Buttons will share the available space equally */
+  margin-bottom: 0.5rem; /* Space below the buttons */
+}
+
+/* Make checkboxes closer */
+.filters-container .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* Smaller gap between checkboxes */
+}
+
+/* Job listings container styles */
+
+job-detail-card {
+  min-width: 600px; /* or any other suitable value */
+  width: 100%; /* or any other suitable percentage */
+  overflow: visible; /* Allow text to fill available space */
+}
+
+/* Form elements styles */
+.filters-container input[type='text'],
+.filters-container select,
+.filters-container input[type='checkbox'] + label,
+.filters-container button {
+  width: 100%;
+  margin-bottom: 0.1rem;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+}
+
+/* Button styles */
+.filters-container button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+.filters-container, .job-listings {
+  width: var(--sidebar-width); /* Use a CSS variable for consistent sizing */
+  width: calc(100% - var(--sidebar-width) - 20px); /* Assuming 20px is the gap you want */
+}
+.filters-container .search-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.filters-container .clear-button {
+  background-color: #ddd;
+  color: var(--text-color);
+}
+
+@keyframes button-hover {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05); /* Increase the scale for a "pulse" effect */
+  }
+}
+
+.filters-container .search-button:hover,
+.filters-container .clear-button:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+.filters-container {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background: white;
+  box-shadow: var(--box-shadow);
+  margin-right: 1rem;
+  margin-top: 1rem; /* Closer to the header */
+  width: 300px; /* Adjust width as necessary */
+}
+
+/* Adjust padding around search and clear filter buttons */
+.filters-container .form-actions {
+  display: flex;
+  gap: 0.5rem; /* Adjust gap between buttons */
+}
+
+.filters-container .search-button,
+.filters-container .clear-button {
+  flex: 1; /* Buttons will share the available space equally */
+  margin-bottom: 0.5rem; /* Space below the buttons */
+}
+
+/* Make checkboxes closer */
+.filters-container .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* Smaller gap between checkboxes */
+}
+
+/* Reduce padding for job cards on mobile for more space */
+.job-card {
+  margin: 0; /* Reset any margin to avoid unintended spacing */
+  width: 100%; /* Job cards should fill the container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 0.5rem;
+  min-height: auto;
+}
+
+/* Make buttons stack on top of each other on mobile */
+.filters-container .form-actions {
+  flex-direction: column;
+}
+
+.filters-container .search-button,
+.filters-container .clear-button {
+  width: 100%; /* Full width for buttons on mobile */
+  margin: 5px 0; /* Only vertical margin */
+}
+
+@media screen and (min-width: 1024px) {
+  /* Styles for large monitors */
+  .main-content {
+    justify-content: center;
+  }
+
+  .job-listings {
+    max-height: auto; /* Adjust height for larger screens */
+  }
+}
+
+/* Improve readability and legibility */
+body {
+  line-height: 1.6; /* Improve line height for better readability */
+}
+
+p, li, label, button, input, select {
+  font-size: 1rem; /* Standardize font size for better legibility */
+}
+
+/* Make the site look more professional */
+header, footer {
+  padding: 1rem 2rem; /* Increase padding for header and footer */
+  background: var(--footer-background-color);
+  color: white;
+}
+
+/* Header styles */
+header {
+  background: var(--header-background-color);
+  color: var(--text-color);
+  box-shadow: var(--box-shadow); /* Add shadow to header for depth */
+}
+
+/* Footer styles */
+footer {
+  background: var(--footer-background-color); /* Darker color for footer */
+  text-align: center; /* Center align the text */
+  padding: 1rem 0; /* Padding top and bottom */
+}
+
+/* Improve form appearance */
+input[type='text'], select {
+  border: 2px solid #ccc; /* Make border thicker for better visibility */
+  padding: 0.75rem; /* Increase padding for larger click area */
+}
+
+/* Hover and focus states for interactivity */
+button:hover, input[type='text']:hover, input[type='text']:focus, select:hover, select:focus {
+  border-color: var(--primary-color); /* Highlight border on hover/focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Modify button appearance on hover */
+.filters-container .search-button:hover,
+.filters-container .clear-button:hover {
+  filter: brightness(110%); /* Slightly change the brightness on hover */
+  transform: translateY(-2px); /* Slight movement for interactive feedback */
+}
+
+/* Finally, add a fade-in effect for loading elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.main-content, .job-card, header, footer {
+  animation: fadeIn var(--animation-duration);
+}
+
+@media screen and (min-width: 1024px) {
+  .main-content {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+  }
+
+  .filters-container,
+  .job-listings {
+    flex: 1; /* Both take up equal space */
+    max-width: 50%; /* Each takes up to half of the container width */
+  }
+
+  .job-listings {
+    margin-left: 1rem; /* Add margin between the filters and job listings */
+    height: auto;
+  }
+
+  .pagination-container, 
+  .job-listings{
+    justify-content: center;
+  }
+}

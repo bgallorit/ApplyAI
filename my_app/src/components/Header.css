@@ -1,0 +1,109 @@
+/* Header styles */
+.header {
+  background-color: #FFFFFF; /* White background as per the mockup */
+  color: #333; /* Default text color for the header, adjust as needed */
+  padding: 10px 0;
+  position: relative; /* Needed for absolute positioning of pseudo-elements */
+}
+
+/* Navigation container */
+.container.navigation {
+  display: flex;
+  justify-content: space-between; /* Keeps logo on left and menu on right */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.current-page {
+  border-bottom: 3px solid var(--primary-color); /* This will show green underline */
+}
+.logo img:hover,
+.logo svg:hover {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(89%) saturate(1357%) hue-rotate(82deg) brightness(91%) contrast(89%);
+}
+/* Logo styles */
+.logo a {
+  color: #333; /* Color for the logo text, typically darker for contrast */
+  text-decoration: none;
+  font-size: 1.4rem; /* Slightly smaller font size for the logo */
+  font-weight: bold;
+  display: flex; /* This allows for vertical centering of inline elements */
+  align-items: center; /* Aligns the logo image and text vertically */
+}
+
+/* Logo image styles */
+.logo a img {
+  transition: transform 0.3s ease; /* Smooth transition for size changes */
+  max-height: 30px; /* Slightly smaller max height for the logo */
+}
+.logo img:hover, .logo svg:hover {
+  filter: hue-rotate(120deg); /* Adjust the hue to match your green color */
+}
+/* Menu link styles */
+.menu a {
+  color: #818C8B; /* Grey color for menu links as per the mockup */
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative; /* For pseudo-element positioning */
+  padding-bottom: 5px; /* Space for the underline */
+}
+
+.menu a.active {
+  background-color: var(--primary-color); /* This will make the underline always green */
+}
+
+/* Active link styles */
+.menu a.active,
+.menu a:hover {
+  color: #4CAF50; /* Green text for active and hover state as per the mockup */
+}
+
+/* Pseudo-element for active link underline */
+.menu a.active::after,
+.menu a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px; /* Adjust as necessary */
+  height: 4px; /* Thickness of the underline */
+  width: 100%; /* Full width of the text */
+  background-color: #4CAF50; /* Green background for underline */
+  transition: width 0.3s ease;
+}
+
+/* Ensure the underline is only visible for the current page */
+.menu a.active::after {
+  width: 100%; /* Underline spans the full width on the active link */
+}
+
+/* Hover link styles - the underline will animate from the center */
+.menu a:hover::after {
+  width: 0;
+  left: 50%;
+}
+
+/* When the mouse enters the link, the underline grows from the center */
+.menu a:hover::after {
+  width: 100%; /* Full width on hover */
+  left: 0;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+/* Responsive menu for smaller screens */
+@media (max-width: 768px) {
+  .container.navigation {
+    flex-direction: column;
+  }
+
+  .menu {
+    margin-top: 10px;
+  }
+
+  .menu a {
+    display: block;
+    margin: 5px 0;
+  }
+}

@@ -1,0 +1,58 @@
+/* About.css */
+
+/* Subtle animation for the profile picture */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Wiggling lines background */
+@keyframes moveSlant {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 50%, #f0f0f0 50%, #f0f0f0 75%, transparent 75%, transparent);
+  background-size: 100px 100px;
+  animation: moveSlant 20s linear infinite;
+}
+
+.about-content {
+  max-width: 600px;
+  text-align: center;
+  padding: 2rem;
+  margin: auto; /* Centers content vertically and horizontally */
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin: auto; /* Centers the image */
+  display: block; /* Makes margin auto effective */
+  animation: pulse 3s infinite ease-in-out;
+}
+
+/* ... Rest of your styles ... */
+
+@media (max-width: 768px) {
+  /* ... Your responsive styles ... */
+}
