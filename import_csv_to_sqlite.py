@@ -9,7 +9,9 @@ def import_csvs(csv_paths, table_name, conn):
     # Loop through the CSV paths
     for path in csv_paths:
         # Read the CSV file
-        df = pd.read_csv(path)
+        df = pd.read_csv(path, nrows = 50)
+
+        df.insert(0, 'id', range(1, 1+len(df)))
 
         # Append the DataFrame to the list
         dfs.append(df)
@@ -28,7 +30,7 @@ jobs_csv_paths = ['backend/data/Jobs_part1.csv']
 labeled_data_path = 'backend/ml_model/data/labeled_data.csv'
 
 # Import the jobs CSV files into SQLite under the 'jobs' table
-import_csvs(jobs_csv_paths, 'jobs', conn)
+import_csvs(jobs_csv_paths, 'filtered_jobs', conn)
 
 # Import the labeled data CSV file into SQLite under the 'labeled_data' table
 df_labeled = pd.read_csv(labeled_data_path)
