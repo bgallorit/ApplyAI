@@ -134,7 +134,7 @@ function App() {
               </>
             } />
             <Route path="/about" element={<About />} />
-            <Route path="/saved_jobs" element={<SavedJobs />} />
+            <Route path="/saved_jobs" element={<SavedJobs onSelectJob={handleSelectJob} />} />
           </Routes>
         </Suspense>
       </main>

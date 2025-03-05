@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
+import DetailedJob from './DetailedJob';
 import './SavedJobs.css';
 
-const SavedJobs = () => {
+const SavedJobs = ({onSelectJob, onApply}) => {
   const [savedJobs, setSavedJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   useEffect(() => {
     // Fetch saved jobs from the server
@@ -33,6 +35,7 @@ const SavedJobs = () => {
     const updatedJobs = savedJobs.filter(job => job.id !== jobId);
     setSavedJobs(updatedJobs);
     // Optionally update server about the removal
+    setSelectedJob(null);
   };
 
   if (isLoading) return <div>Loading saved jobs...</div>;
@@ -42,15 +45,30 @@ const SavedJobs = () => {
     <div className="saved-jobs-container">
       <h1>Saved Jobs</h1>
       {savedJobs.length > 0 ? (
-        <div className="saved-jobs-list">
-          {savedJobs.map((job) => (
-            <JobCard key={job.id} job={job} onRemoveJob={() => handleRemoveJob(job.id)} />
-          ))}
+        <div className="saved-jobs-layout">
+          <div className="saved-jobs-list">
+            {savedJobs.map((job) => (
+              <JobCard 
+              key={job.id} 
+              job={job} 
+              onRemoveJob={() => handleRemoveJob(job.id)} 
+              onSelectJob={setSelectedJob} 
+              onApply={onApply} 
+              />
+            ))}
+          </div>
+          {selectedJob && (
+            <div className="detailed-job-container">
+              <DetailedJob job={selectedJob} />
+            </div>
+          )}
         </div>
       ) : (
         <p>You have no saved jobs.</p>
       )}
+      
     </div>
+    
   );
 };
 
