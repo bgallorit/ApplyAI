@@ -77,7 +77,7 @@ function App() {
   }
 
   const handleSaveJob = async (job) => {
-    console.log('saving job', job);
+    console.log('saving job', job.id, job.title);
     const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
   
     try {
@@ -91,7 +91,7 @@ function App() {
           type: job.type,
           title: job.title,
           description: job.description,
-          qualifications: job.qualification
+          qualifications: job.qualifications
         }),
       });
   

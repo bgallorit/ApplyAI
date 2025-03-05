@@ -11,7 +11,7 @@ function JobCard({ job, onSaveJob, onApply, onSelectJob }) {
   const handleSaveJob = (e) => {
     e.stopPropagation(); // Prevent click event from bubbling up to the card
     if (!isSaved) {
-      onSaveJob(job.id);
+      onSaveJob(job);
       setIsSaved(true); // Mark as saved after action
     }
   };
