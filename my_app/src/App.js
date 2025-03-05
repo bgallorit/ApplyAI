@@ -6,6 +6,7 @@ import Pagination from './components/Pagination1'; // Ensure this component exis
 import './App.css';
 import useDebounce from './useDebounce';
 
+
 // Lazy loaded components
 const About = lazy(() => import('./components/About'));
 const SavedJobs = lazy(() => import('./components/SavedJobs'));
@@ -71,6 +72,40 @@ function App() {
     setSelectedJob(job);
   };
 
+  const handleApply = (job) => {
+    console.log('you appplied heres a sticker');
+  }
+
+  const handleSaveJob = async (job) => {
+    console.log('saving job', job);
+    const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
+  
+    try {
+      const response = await fetch(`${apiUrl}/saved_jobs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: job.id,
+          type: job.type,
+          title: job.title,
+          description: job.description,
+          qualifications: job.qualification
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to save the job');
+      }
+  
+      const data = await response.json();
+      console.log('Job saved successfully:', data);
+    } catch (error) {
+      console.error('Error saving job:', error);
+    }
+  };
+
   return (
     <div className="App">
       <Header />
@@ -85,6 +120,8 @@ function App() {
                   error={error} 
                   jobs={jobs}
                   onSelectJob={handleSelectJob}
+                  onApply={handleApply}
+                  onSaveJob={handleSaveJob}
                 />
                 {totalPages > 1 && ( // Only display if there is more than one page
                   <Pagination
@@ -93,11 +130,11 @@ function App() {
                     onPageChange={handlePageChange}
                   />
                 )}
-                {selectedJob && <DetailedJob job={selectedJob} />}
+                {selectedJob && <DetailedJob job={selectedJob} onApply={handleApply} />}
               </>
             } />
             <Route path="/about" element={<About />} />
-            <Route path="/saved-jobs" element={<SavedJobs />} />
+            <Route path="/saved_jobs" element={<SavedJobs />} />
           </Routes>
         </Suspense>
       </main>

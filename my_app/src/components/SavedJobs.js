@@ -13,7 +13,7 @@ const SavedJobs = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/saved-jobs`);
+        const response = await fetch('http://localhost:5000/api/saved_jobs');
         if (!response.ok) throw new Error('Failed to fetch saved jobs');
         const data = await response.json();
         setSavedJobs(data.jobs);

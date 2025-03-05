@@ -14,7 +14,7 @@ const RoutesComponent = () => {
       <Routes>
         <Route path="/" element={<App />} /> {/* Home page route, using App as the main page */}
         <Route path="/about" element={<About />} /> {/* About page route */}
-        <Route path="/saved-jobs" element={<SavedJobs />} /> {/* Saved jobs page route */}
+        <Route path="/saved_jobs" element={<SavedJobs />} /> {/* Saved jobs page route */}
         {/* Add other routes as needed */}
       </Routes>
       <Footer /> {/* Site-wide footer component */}

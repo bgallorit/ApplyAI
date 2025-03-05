@@ -14,7 +14,7 @@ function Header() {
           <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''} end>
             Find Jobs
           </NavLink>
-          <NavLink to="/saved-jobs" className={({ isActive }) => isActive ? 'active-link' : ''}>
+          <NavLink to="/saved_jobs" className={({ isActive }) => isActive ? 'active-link' : ''}>
             Saved Jobs
           </NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>
