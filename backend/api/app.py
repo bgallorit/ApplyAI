@@ -47,6 +47,31 @@ class FilterJob(db.Model):
             'postedDate': self.postedDate.strftime('%m/%d/%Y') if self.postedDate else None,
             'is_suitable': self.is_suitable
         }
+    
+
+class SavedJob(db.Model):
+    __tablename__ = 'saved_jobs'
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(255))
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    qualifications = db.Column(db.Text, nullable=False)
+    postedQuarter = db.Column(db.String(255))
+    postedDate = db.Column(db.DateTime, default=db.func.now())
+    is_suitable = db.Column(db.Boolean, default=False)
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'type': self.type,
+            'title': self.title,
+            'description': self.description,
+            'qualifications': self.qualifications,
+            'postedQuarter': self.postedQuarter,
+            'postedDate': self.postedDate.strftime('%m/%d/%Y') if self.postedDate else None,
+            'is_suitable': self.is_suitable
+        }
+
 
 @app.route('/api/jobs', methods=['GET'])
 def get_jobs():
@@ -79,6 +104,41 @@ def get_jobs_count():
     count = FilterJob.query.count()
     logging.info(f"Total number of jobs: {count}")
     return jsonify({'count': count})
+
+
+@app.route('/api/saved_jobs', methods=['POST'])
+def save_job():
+    data = request.get_json()
+
+    saved_job = SavedJob(
+        id=data['id'],
+        type=data['type'],
+        title=data['title'],
+        description=data['description'],
+        qualifications=data['qualifications']
+    )
+
+    try:
+        db.session.add(saved_job)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f"Error while saving job: {e}")
+
+
+@app.route('/api/saved_jobs', methods=['GET'])
+def get_saved_jobs():
+    try:
+        saved_jobs = SavedJob.query.all()
+
+        serialized_jobs = [job.serialize() for job in saved_jobs]
+
+        return jsonify({
+            'jobs': serialized_jobs
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/')
 def index():
