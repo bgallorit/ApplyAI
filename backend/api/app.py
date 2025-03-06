@@ -125,6 +125,8 @@ def save_job():
         db.session.rollback()
         logging.error(f"Error while saving job: {e}")
 
+    return jsonify({'message': 'Job saved successfully'}), 201
+
 
 @app.route('/api/saved_jobs', methods=['GET'])
 def get_saved_jobs():
@@ -155,6 +157,8 @@ def delete_saved_job(id):
     except Exception as e:
         db.session.rollback()
         logging.error(f"Error deleting job: {e}")
+    
+    return '', 204
 
 
 @app.route('/')

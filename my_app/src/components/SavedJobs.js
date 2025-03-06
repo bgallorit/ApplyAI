@@ -3,7 +3,7 @@ import JobCard from './JobCard';
 import DetailedJob from './DetailedJob';
 import './SavedJobs.css';
 
-const SavedJobs = ({onSelectJob, onApply, onRemoveJob}) => {
+const SavedJobs = ({onApply}) => {
   const [savedJobs, setSavedJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,6 +33,26 @@ const SavedJobs = ({onSelectJob, onApply, onRemoveJob}) => {
   if (isLoading) return <div>Loading saved jobs...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  const handleRemoveJob = async (jobId) => {
+    console.log('removing job', jobId);
+    const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
+  
+    try {
+      const response = await fetch(`${apiUrl}/saved_jobs/${jobId}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to remove the job');
+      }
+
+      setSavedJobs(prevJobs => prevJobs.filter(job => job.id !== jobId));
+      console.log('Job removed successfully');
+    } catch (error) {
+      console.error('Error removing job:', error);
+    }
+  };
+
   return (
     <div className="saved-jobs-container">
       <h1>Saved Jobs</h1>
@@ -43,7 +63,7 @@ const SavedJobs = ({onSelectJob, onApply, onRemoveJob}) => {
               <JobCard 
               key={job.id} 
               job={job} 
-              onRemoveJob={onRemoveJob}
+              onRemoveJob={() => handleRemoveJob(job.id)}
               onSelectJob={setSelectedJob} 
               onApply={onApply} 
               />

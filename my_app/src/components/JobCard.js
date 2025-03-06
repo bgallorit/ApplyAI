@@ -3,33 +3,38 @@ import PropTypes from 'prop-types';
 import './JobCard.css';
 
 function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
-  // State to manage save and apply actions
   const [isSaved, setIsSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
+  const [showApplyPopup, setShowApplyPopup] = useState(false); // State for popup
+
   const isSavedPage = Boolean(onRemoveJob);
 
-  // Function to handle saving a job
   const handleSaveJob = (e) => {
-    e.stopPropagation(); // Prevent click event from bubbling up to the card
+    e.stopPropagation();
     if (!isSaved) {
       onSaveJob(job);
-      setIsSaved(true); // Mark as saved after action
+      setIsSaved(true);
     }
   };
 
-  // Function to handle applying for a job
   const handleApply = (e) => {
-    e.stopPropagation(); // Prevent click event from bubbling up to the card
+    e.stopPropagation();
     if (!isApplied) {
       onApply(job.id);
-      setIsApplied(true); // Mark as applied after action
+      setIsApplied(true);
+      setShowApplyPopup(true); // Show popup when apply is pressed
     }
   };
 
   const handleRemoveJob = (e) => {
     e.stopPropagation();
-    onRemoveJob(job);
-  }
+    onRemoveJob(job.id); // Ensure you're passing only the job id if that's expected
+  };
+
+  const closePopup = (e) => {
+    e.stopPropagation();
+    setShowApplyPopup(false);
+  };
 
   return (
     <div className="job-card" onClick={() => onSelectJob(job)}>
@@ -54,20 +59,26 @@ function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
           </button>
         ) : (
           <button className={`btn-save ${isSaved ? 'saved' : ''}`} onClick={handleSaveJob}>
-            {isSavedPage ? 'Saved' : 'Save Job'}
+            Save Job
           </button>
         )}
-        <button className={`btn-apply`} onClick={handleApply}>
+        <button className="btn-apply" onClick={handleApply}>
           Apply Now
         </button>
       </div>
+      {showApplyPopup && (
+        <div className="apply-popup">
+          <p><a href="https://rit-csm.symplicity.com/students/app/home">Apply on CareerConnect</a></p>
+          <button className="close-popup" onClick={closePopup}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
 
 // Helper function to create a text snippet with ellipsis
 const createSnippet = (text) => {
-  const maxLength = 80; // Adjust this value as needed to fit one line
+  const maxLength = 80;
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
 };
 
@@ -83,7 +94,8 @@ JobCard.propTypes = {
   }),
   onSaveJob: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
-  onSelectJob: PropTypes.func.isRequired
+  onSelectJob: PropTypes.func.isRequired,
+  onRemoveJob: PropTypes.func // Optional; provided if on a saved jobs page
 };
 
 export default JobCard;

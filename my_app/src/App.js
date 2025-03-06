@@ -106,24 +106,7 @@ function App() {
     }
   };
 
-  const handleRemoveJob = async (job) => {
-    console.log('removing job', job.id, job.title);
-    const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
   
-    try {
-      const response = await fetch(`${apiUrl}/saved_jobs/${job.id}`, {
-        method: 'DELETE',
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to remove the job');
-      }
-  
-      console.log('Job removed successfully');
-    } catch (error) {
-      console.error('Error removing job:', error);
-    }
-  };
 
   return (
     <div className="App">
