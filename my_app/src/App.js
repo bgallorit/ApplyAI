@@ -6,7 +6,6 @@ import Pagination from './components/Pagination1'; // Ensure this component exis
 import './App.css';
 import useDebounce from './useDebounce';
 
-
 // Lazy loaded components
 const About = lazy(() => import('./components/About'));
 const SavedJobs = lazy(() => import('./components/SavedJobs'));
@@ -45,12 +44,16 @@ function App() {
     setError(null);
     try {
       const queryString = `${Object.keys(searchFilters)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(searchFilters[key])}`)
-        .join('&')}&page=${page}`; // Added page to the query
+        .map(
+          (key) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(searchFilters[key])}`
+        )
+        .join('&')}&page=${page}`;
 
-      const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
+      const apiUrl = "http://localhost:5000/api"; //|| process.env.REACT_APP_API_URL;
       const response = await fetch(`${apiUrl}/jobs?${queryString}`);
-      if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`Network response was not ok: ${response.status}`);
 
       let data = await response.json();
       setJobs(data.jobs);
@@ -66,20 +69,20 @@ function App() {
 
   useEffect(() => {
     fetchJobs(debouncedFilters, currentPage);
-  }, [debouncedFilters, currentPage]); // Added currentPage as a dependency
+  }, [debouncedFilters, currentPage]);
 
   const handleSelectJob = (job) => {
     setSelectedJob(job);
   };
 
-  const handleApply = (job) => {
-    console.log('you appplied heres a sticker');
-  }
+  const handleApply = (jobId) => {
+    console.log("You applied! Here's a sticker");
+  };
 
   const handleSaveJob = async (job) => {
     console.log('saving job', job.id, job.title);
-    const apiUrl = "http://localhost:5000/api" //|| process.env.REACT_APP_API_URL;
-  
+    const apiUrl = "http://localhost:5000/api"; //|| process.env.REACT_APP_API_URL;
+
     try {
       const response = await fetch(`${apiUrl}/saved_jobs`, {
         method: 'POST',
@@ -91,22 +94,42 @@ function App() {
           type: job.type,
           title: job.title,
           description: job.description,
-          qualifications: job.qualifications
+          qualifications: job.qualifications,
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to save the job');
       }
-  
-      const data = await response.json();
+
+      // Handle cases where the response might be empty
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : {};
       console.log('Job saved successfully:', data);
     } catch (error) {
       console.error('Error saving job:', error);
     }
   };
 
-  
+  // Updated to accept a job ID (since JobCard now passes job.id)
+  const handleRemoveJob = async (jobId) => {
+    console.log('removing job', jobId);
+    const apiUrl = "http://localhost:5000/api"; //|| process.env.REACT_APP_API_URL;
+
+    try {
+      const response = await fetch(`${apiUrl}/saved_jobs/${jobId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove the job');
+      }
+
+      console.log('Job removed successfully');
+    } catch (error) {
+      console.error('Error removing job:', error);
+    }
+  };
 
   return (
     <div className="App">
@@ -114,33 +137,43 @@ function App() {
       <main className="main-content">
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={
-              <>
-                <Filters onFilterChange={handleFilterChange} />
-                <JobListings 
-                  isLoading={isLoading} 
-                  error={error} 
-                  jobs={jobs}
-                  onSelectJob={handleSelectJob}
-                  onApply={handleApply}
-                  onSaveJob={handleSaveJob}
-                />
-                {totalPages > 1 && ( // Only display if there is more than one page
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Filters onFilterChange={handleFilterChange} />
+                  <JobListings
+                    isLoading={isLoading}
+                    error={error}
+                    jobs={jobs}
+                    onSelectJob={handleSelectJob}
+                    onApply={handleApply}
+                    onSaveJob={handleSaveJob}
                   />
-                )}
-                {selectedJob && <DetailedJob job={selectedJob} onApply={handleApply} />}
-              </>
-            } />
+                  {totalPages > 1 && (
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  )}
+                  {selectedJob && (
+                    <DetailedJob job={selectedJob} onApply={handleApply} />
+                  )}
+                </>
+              }
+            />
             <Route path="/about" element={<About />} />
-            <Route path="/saved_jobs" element={
-            <SavedJobs 
-              onSelectJob={handleSelectJob} 
-              onRemoveJob={handleRemoveJob} 
-              onApply={handleApply}/>} />
+            <Route
+              path="/saved_jobs"
+              element={
+                <SavedJobs
+                  onSelectJob={handleSelectJob}
+                  onRemoveJob={handleRemoveJob}
+                  onApply={handleApply}
+                />
+              }
+            />
           </Routes>
         </Suspense>
       </main>
