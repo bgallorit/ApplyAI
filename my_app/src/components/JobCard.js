@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './JobCard.css';
 
-function JobCard({ job, onSaveJob, onApply, onSelectJob }) {
+function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
   // State to manage save and apply actions
   const [isSaved, setIsSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
+  const isSavedPage = Boolean(onRemoveJob);
 
   // Function to handle saving a job
   const handleSaveJob = (e) => {
@@ -25,6 +26,11 @@ function JobCard({ job, onSaveJob, onApply, onSelectJob }) {
     }
   };
 
+  const handleRemoveJob = (e) => {
+    e.stopPropagation();
+    onRemoveJob(job);
+  }
+
   return (
     <div className="job-card" onClick={() => onSelectJob(job)}>
       <div className="job-card-content">
@@ -42,11 +48,17 @@ function JobCard({ job, onSaveJob, onApply, onSelectJob }) {
         </div>
       </div>
       <div className="job-actions">
-        <button className={`btn-save ${isSaved ? 'saved' : ''}`} onClick={handleSaveJob}>
-          {isSaved ? 'Saved' : 'Save Job'}
-        </button>
-        <button className={`btn-apply ${isApplied ? 'applied' : ''}`} onClick={handleApply}>
-          {isApplied ? 'Applied' : 'Apply Now'}
+        {isSavedPage ? (
+          <button className="btn-remove" onClick={handleRemoveJob}>
+            Remove Job
+          </button>
+        ) : (
+          <button className={`btn-save ${isSaved ? 'saved' : ''}`} onClick={handleSaveJob}>
+            {isSavedPage ? 'Saved' : 'Save Job'}
+          </button>
+        )}
+        <button className={`btn-apply`} onClick={handleApply}>
+          Apply Now
         </button>
       </div>
     </div>

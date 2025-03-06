@@ -14,7 +14,8 @@ load_dotenv()
 
 # Initialize Flask application
 app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing for all routes.
+CORS(app)
+  # Enable Cross-Origin Resource Sharing for all routes.
 
 # Set up the SQLAlchemy database URI with an absolute path
 project_root = os.path.abspath(os.path.dirname(__file__))
@@ -117,7 +118,6 @@ def save_job():
         description=data['description'],
         qualifications=data['qualifications']
     )
-
     try:
         db.session.add(saved_job)
         db.session.commit()
@@ -138,6 +138,23 @@ def get_saved_jobs():
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/saved_jobs/<int:id>', methods=['DELETE'])
+def delete_saved_job(id):
+    try:
+        job = SavedJob.query.get(id)
+
+        if job is None:
+            return jsonify({'error': 'Job not found'}), 404
+
+        db.session.delete(job)
+        db.session.commit()
+
+        logging.info(f"job {id} successfully removed")
+
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f"Error deleting job: {e}")
 
 
 @app.route('/')

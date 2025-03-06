@@ -72,7 +72,8 @@ dl, dt {
 }
 
 .btn-save,
-.btn-apply {
+.btn-apply,
+.btn-remove {
   border: none;
   padding: 10px 20px;
   border-radius: var(--border-radius);
@@ -81,12 +82,12 @@ dl, dt {
   transition: background-color var(--transition-speed);
 }
 
-.btn-save {
+.btn-save, .btn-remove {
   background-color: #f9f9f9;
   color: var(--text-color);
 }
 
-.btn-save:hover {
+.btn-save:hover, .btn-remove:hover {
   background-color: #e2e2e2;
 }
 

@@ -3,7 +3,7 @@ import JobCard from './JobCard';
 import DetailedJob from './DetailedJob';
 import './SavedJobs.css';
 
-const SavedJobs = ({onSelectJob, onApply}) => {
+const SavedJobs = ({onSelectJob, onApply, onRemoveJob}) => {
   const [savedJobs, setSavedJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,14 +30,6 @@ const SavedJobs = ({onSelectJob, onApply}) => {
     fetchSavedJobs();
   }, []);
 
-  const handleRemoveJob = (jobId) => {
-    // Remove a job from saved list
-    const updatedJobs = savedJobs.filter(job => job.id !== jobId);
-    setSavedJobs(updatedJobs);
-    // Optionally update server about the removal
-    setSelectedJob(null);
-  };
-
   if (isLoading) return <div>Loading saved jobs...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -51,7 +43,7 @@ const SavedJobs = ({onSelectJob, onApply}) => {
               <JobCard 
               key={job.id} 
               job={job} 
-              onRemoveJob={() => handleRemoveJob(job.id)} 
+              onRemoveJob={onRemoveJob}
               onSelectJob={setSelectedJob} 
               onApply={onApply} 
               />
