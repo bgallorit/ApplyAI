@@ -1,13 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './JobCard.css';
 
 function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
   const [isSaved, setIsSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
-  const [showApplyPopup, setShowApplyPopup] = useState(false); // State for popup
+  const [showApplyPopup, setShowApplyPopup] = useState(false);
+  const [jobFit, setJobFit] = useState(null);
 
   const isSavedPage = Boolean(onRemoveJob);
+
+  useEffect(() => {
+    const fetchJobFit = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/jobs/${job.id}/suitable`);
+        const data = await response.json();
+        setJobFit(determineJobFit(data.is_suitable));
+      } catch (error) {
+        console.error('Error fetching job fit:', error);
+      }
+    };
+
+    fetchJobFit();
+  }, [job.id]);
+
+  const determineJobFit = (value) => {
+    switch (true) {
+      case value >= 0.8:
+        return "very good";
+      case value >= 0.6:
+        return "good";
+      case value >= 0.4:
+        return "mediocre";
+      case value >= 0.2:
+        return "poor";
+    }
+    return "very poor";
+  }
+
 
   const handleSaveJob = (e) => {
     e.stopPropagation();
@@ -36,10 +66,7 @@ function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
     setShowApplyPopup(false);
   };
 
-  function determineJobFit() {
-    return "good";
-  }
-
+  
   return (
     <div className="job-card" onClick={() => onSelectJob(job)}>
       <div className="job-card-content">
@@ -48,7 +75,7 @@ function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
           <p className="job-company">{job.company}</p>
           <p className="job-location">{job.location}</p>
           {job.type && <p className="job-type">{job.type}</p>}
-          <p className="job-fit">Job likely a {determineJobFit()} fit</p>
+          <p className="job-fit"><b>Job likely a {jobFit} fit ({job.is_suitable})</b></p>
         </div>
         <div className="job-description-scroll">
           <strong>Description:</strong>

@@ -35,7 +35,7 @@ class FilterJob(db.Model):
     qualifications = db.Column(db.Text, nullable=False)
     postedQuarter = db.Column(db.String(255))
     postedDate = db.Column(db.DateTime, default=db.func.now())
-    is_suitable = db.Column(db.Boolean, default=False)
+    is_suitable = db.Column(db.Float, default=0.0)
 
     def serialize(self):
         return {
@@ -59,7 +59,7 @@ class SavedJob(db.Model):
     qualifications = db.Column(db.Text, nullable=False)
     postedQuarter = db.Column(db.String(255))
     postedDate = db.Column(db.DateTime, default=db.func.now())
-    is_suitable = db.Column(db.Boolean, default=False)
+    is_suitable = db.Column(db.Float, default=0.0)
 
     def serialize(self):
         return {
@@ -159,6 +159,19 @@ def delete_saved_job(id):
         logging.error(f"Error deleting job: {e}")
     
     return '', 204
+
+
+@app.route('/api/jobs/<int:id>/suitable', methods=['GET'])
+def get_job_suitability(id):
+    try:
+        job = FilterJob.query.get(id)
+        if job is None:
+            return jsonify({'error': 'Job not found'}), 404
+        
+        return jsonify({'is_suitable': job.is_suitable})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 @app.route('/')
