@@ -7,11 +7,11 @@ const About = () => {
     <div className="about-container">
       <div className="about-content">
         {/* <img src={profilePic} alt="Maggie Long" className="about-image"/> */}
-        <h1>About Grad Job Search Engine</h1>
+        <h1>About ApplyAI</h1>
         <p>
-          The Grad Job Search Engine is dedicated to revolutionizing the job search
+          ApplyAI is dedicated to revolutionizing the job search
           experience for recent college graduates. This platform, a passion project
-          by Maggie Long, focuses on accessibility and navigable design, helping new
+          created by Maggie Long and continued by Brendan Gallo and Jack Irish, focuses on accessibility and navigable design, helping new
           professionals start their careers.
         </p>
         <h2>Our Machine Learning Approach</h2>

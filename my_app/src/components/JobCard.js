@@ -36,6 +36,10 @@ function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
     setShowApplyPopup(false);
   };
 
+  function determineJobFit() {
+    return "good";
+  }
+
   return (
     <div className="job-card" onClick={() => onSelectJob(job)}>
       <div className="job-card-content">
@@ -44,6 +48,7 @@ function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
           <p className="job-company">{job.company}</p>
           <p className="job-location">{job.location}</p>
           {job.type && <p className="job-type">{job.type}</p>}
+          <p className="job-fit">Job likely a {determineJobFit()} fit</p>
         </div>
         <div className="job-description-scroll">
           <strong>Description:</strong>
