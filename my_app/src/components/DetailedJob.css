@@ -46,7 +46,8 @@
 .detailed-job-actions {
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end; /* Align action buttons to the right */
+  justify-content: center; /* Align action buttons to the right */
+  font-weight: bold;
 }
 
 .detailed-job p {
@@ -65,7 +66,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 4px; /* Match the border-radius with other elements */
+  border-radius: 10px; /* Match the border-radius with other elements */
   margin: 4px 2px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover and press */

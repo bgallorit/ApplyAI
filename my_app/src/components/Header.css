@@ -8,7 +8,7 @@
 .header {
   background-color: #FFFFFF; /* White background as per the mockup */
   color: #333; /* Default text color for the header, adjust as needed */
-  padding: 10px 0;
+  padding: 25px 0;
   position: relative; /* Needed for absolute positioning of pseudo-elements */
 }
 
