@@ -38,18 +38,17 @@ dl, dt {
 }
 
 /* Job Card Styles */
-  .job-card {
-    background-color: #fff;
-    border: 1px solid #e1e1e1;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 1rem; /* Space between cards */
-    padding: 20px;
-    width: 100%;
-    max-width: 400px; /* Maximum width of the job cards */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Contains the content within each card */
+.job-card {
+  width: 350px; /* Set the width of the job cards */
+  height: 250px; /* Set the height of the job cards */
+  margin-bottom: 1rem; /* This adds space between each job listing if gap doesn't work */
+  border: 1px solid #e1e1e1;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
+  display: flex; /* Use flex layout to easily align child elements */
+  flex-direction: column; /* Stack child elements vertically */
+  justify-content: space-between; /* Distribute space between items */
 }
 
 .job-card-content {

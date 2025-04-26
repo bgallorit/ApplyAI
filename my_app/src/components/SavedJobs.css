@@ -3,7 +3,7 @@
 /* Container styles for the saved jobs page */
 .saved-jobs-container {
   padding: 20px;
-  max-width: 1000px;
+  max-width: 100rem;
   margin: 40px auto;
   background-color: #fff;
   border-radius: 10px;
@@ -26,17 +26,20 @@
 }
 
 .saved-jobs-layout {
-  width: 1500px;
+  /* width: 10em; */
   display: flex;
   gap: 5rem;
 }
 
 /* List styling for saved jobs */
 .saved-jobs-list {
+  overflow-y: scroll;
+  height: 40rem;
   display: flex;
   /* flex: 1; */
   flex-direction: column;
   gap: 20px;
+  padding: 1em;
 }
 
 .detailed-job-container {

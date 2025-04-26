@@ -9,6 +9,7 @@ function Header() {
         {/* Logo */}
         <NavLink to="/" className="logo-link">
         <img src="/suitcase.svg" alt="Logo" style={{ height: '50px' }} />
+        <p className="headerName">ApplyAI</p>
         </NavLink>
         <div className="menu">
           <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''} end>
