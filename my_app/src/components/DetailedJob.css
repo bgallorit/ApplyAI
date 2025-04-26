@@ -1,13 +1,13 @@
 /* DetailedJob component styling */
 .detailed-job {
-  margin: 20px auto; /* Center the detailed job view in the container */
+  margin: auto; /* Center the detailed job view in the container */
   padding: 20px;
   border: 1px solid #ddd; /* Light grey border */
-  border-radius: 4px;
+  border-radius: 10px;
   background: #fff; /* White background for clarity */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
   max-width: 600px; /* Max width to avoid overly wide layouts */
-  max-height: 600px; /* Limit height to trigger overflow */
+  max-height: 40rem; /* Limit height to trigger overflow */
   overflow-y: auto; /* Enable vertical scrolling */
   position: relative; /* Needed for absolute positioning of the scrollbar */
   scrollbar-width: thin; /* Make scrollbar thinner for non-webkit browsers */

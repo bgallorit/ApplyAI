@@ -91,10 +91,12 @@ function App() {
         },
         body: JSON.stringify({
           id: job.id,
+          is_suitable: job.is_suitable,
           type: job.type,
           title: job.title,
           description: job.description,
           qualifications: job.qualifications,
+          
         }),
       });
 

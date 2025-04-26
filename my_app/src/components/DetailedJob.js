@@ -18,7 +18,7 @@ function DetailedJob({ job }) {
     <div className="detailed-job">
       <h2>{job.title}</h2>
       <h3>{job.company}</h3>
-      <p><strong>Location:</strong> {job.location}</p>
+      {/* <p><strong>Location:</strong> {job.location}</p> */}
       <p><strong>Job Type:</strong> {job.type}</p>
       <p><strong>Description:</strong></p>
       <p>{job.description}</p>

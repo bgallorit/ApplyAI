@@ -56,7 +56,7 @@
 .headerName {
   font-family: headerName;
   margin-left: 8px;          /* space between logo and text */
-  font-size: 1.5rem;         /* tweak as desired */
+  font-size: 2rem;         /* tweak as desired */
   font-weight: bold;
   color: inherit;            /* match the rest of your nav text */
 }

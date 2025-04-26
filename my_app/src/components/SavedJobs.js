@@ -65,7 +65,8 @@ const SavedJobs = ({onApply}) => {
               job={job} 
               onRemoveJob={() => handleRemoveJob(job.id)}
               onSelectJob={setSelectedJob} 
-              onApply={onApply} 
+              onApply={onApply}
+     
               />
             ))}
           </div>

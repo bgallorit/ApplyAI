@@ -113,6 +113,7 @@ def save_job():
 
     saved_job = SavedJob(
         id=data['id'],
+        is_suitable=data['is_suitable'],
         type=data['type'],
         title=data['title'],
         description=data['description'],

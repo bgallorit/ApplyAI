@@ -3,7 +3,7 @@
   flex-basis: 200px; /* Adjust this value as needed */
   width: 100%; /* This will allow it to grow to the flex-basis if there's space */
   max-width: 300px; /* This will prevent it from growing any larger than 300px */
-  height: auto; /* The height is adjusted automatically based on content */
+  height: 40rem; /* The height is adjusted automatically based on content */
   padding: 10px; /* Reduced padding */
   border-radius: 10px;
   flex: 0 0 var(--sidebar-width); /* Do not grow or shrink, use --sidebar-width variable */

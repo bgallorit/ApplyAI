@@ -18,6 +18,7 @@
 }
 
 /* Base Styles */
+/*ff*/
 *,
 *::before,
 *::after {
@@ -35,7 +36,7 @@ dl, dt {
 }
 
 .job-listings-container {
-  height: 50rem; /* or any other value that fits your design */
+  height: 40rem; /* or any other value that fits your design */
   overflow-y: auto;
   margin: 2px 0;
   padding: 1rem;
