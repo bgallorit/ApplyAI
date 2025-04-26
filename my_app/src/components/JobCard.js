@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './JobCard.css';
 
-function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob }) {
+function JobCard({ job, onSaveJob, onRemoveJob, onApply, onSelectJob}) {
   const [isSaved, setIsSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const [showApplyPopup, setShowApplyPopup] = useState(false);
